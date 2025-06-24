@@ -24,7 +24,7 @@ jobs:
       - name: Run lint
         run: npm run lint
 
-      - name: Run tests
+      - name: Run unit tests (Vitest)
         run: npm test -- --run
 
       - name: Build check
