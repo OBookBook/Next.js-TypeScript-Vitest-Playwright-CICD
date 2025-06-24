@@ -54,9 +54,16 @@ jobs:
       - name: Run tests with coverage
         run: npm test -- --coverage
 
-      - name: Upload coverage to Codecov
+      - name: Upload coverage reports as artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-reports
+          path: coverage/
+          retention-days: 30
+
+      - name: Upload coverage to Codecov (no token)
         uses: codecov/codecov-action@v3
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/lcov.info
-          fail_ci_if_error: true
+          fail_ci_if_error: false
+        continue-on-error: true
