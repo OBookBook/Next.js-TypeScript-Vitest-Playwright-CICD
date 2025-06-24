@@ -24,8 +24,14 @@ jobs:
       - name: Run lint
         run: npm run lint
 
-      - name: Run tests
-        run: npm test
+      - name: Run unit tests (Vitest)
+        run: npm test -- --run
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run E2E tests (Playwright)
+        run: npm run test:e2e
 
       - name: Build project
         run: npm run build
@@ -48,7 +54,7 @@ jobs:
         run: npm ci
 
       - name: Run tests with coverage
-        run: npm test -- --coverage
+        run: npm test -- --coverage --run
 
       - name: Upload coverage reports as artifacts
         uses: actions/upload-artifact@v4
